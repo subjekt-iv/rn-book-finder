@@ -1,5 +1,5 @@
 import {create} from 'zustand';
-import {searchBooks, getBookDetails, getAuthorDetails} from '@/api';
+import {searchBooks, getBookDetails, getAuthorDetails} from '@/services/api';
 
 const useBookStore = create(set => ({
   books: [],
@@ -20,7 +20,7 @@ const useBookStore = create(set => ({
     try {
       const response = await getBookDetails(workKey);
       const authorResponse = await getAuthorDetails(
-        response.data.authors[0].key,
+        response.data.authors[0].author.key,
       );
       set({
         bookDetails: {...response.data, author: authorResponse.data},

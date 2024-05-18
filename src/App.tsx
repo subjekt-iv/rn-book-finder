@@ -22,12 +22,12 @@ function App(): React.JSX.Element {
           <Stack.Screen
             name="BookList"
             component={BookListScreen}
-            options={{title: 'Book Search'}}
+            options={{title: 'Búsqueda'}}
           />
           <Stack.Screen
             name="BookDetail"
             component={BookDetailScreen}
-            options={{title: 'Book Details'}}
+            options={{title: 'Detalles'}}
           />
         </Stack.Navigator>
       </NavigationContainer>

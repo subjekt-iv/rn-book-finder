@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {View} from 'react-native';
 import useBookStore from '@/store/bookStore';
 import BookListTemplate from '@/components/templates/book-list-template';
 

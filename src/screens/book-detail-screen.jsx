@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, ScrollView} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import useBookStore from '@/store/bookStore';
 
@@ -14,23 +14,47 @@ const BookDetailScreen = () => {
   }, [fetchBookDetails, workKey]);
 
   return (
-    <View className="p-4">
-      {loading && <Text className="text-center text-lg">Loading...</Text>}
+    <View className="flex items-start justify-center p-4">
       {error && (
         <Text className="text-center text-lg text-red-500">{error}</Text>
       )}
-      {bookDetails && (
-        <View>
-          <Image source={{uri: bookDetails.cover}} className="w-full h-64" />
-          <Text className="text-2xl font-bold mt-4">{bookDetails.title}</Text>
-          <Text className="text-gray-500">
-            {bookDetails.first_publish_year}
-          </Text>
-          <Text className="mt-4">{bookDetails.description}</Text>
-          <Text className="mt-4 text-xl">{bookDetails.author_name}</Text>
-          <Text className="text-gray-500">{bookDetails.author.bio}</Text>
-        </View>
-      )}
+      <ScrollView>
+        {bookDetails && (
+          <View>
+            {bookDetails.cover && typeof bookDetails.cover === 'string' && (
+              <Image source={{uri: bookDetails.cover}} className="w-full h-2" />
+            )}
+            {bookDetails.title && typeof bookDetails.title === 'string' && (
+              <Text className="text-2xl text-primary font-bold mt-4">
+                {bookDetails.title}
+              </Text>
+            )}
+            {bookDetails.first_publish_year &&
+              typeof bookDetails.first_publish_year === 'string' && (
+                <Text className="text-primary">
+                  {bookDetails.first_publish_year}
+                </Text>
+              )}
+            {bookDetails.description &&
+              typeof bookDetails.description === 'string' && (
+                <Text className="mt-4 text-primary">
+                  {bookDetails.description}
+                </Text>
+              )}
+            {bookDetails.author_name &&
+              typeof bookDetails.author_name === 'string' && (
+                <Text className="mt-4 text-xl text-primary">
+                  {bookDetails.author_name}
+                </Text>
+              )}
+            {bookDetails.author &&
+              bookDetails.author.bio &&
+              typeof bookDetails.author.bio === 'string' && (
+                <Text className="text-primary">{bookDetails.author.bio}</Text>
+              )}
+          </View>
+        )}
+      </ScrollView>
     </View>
   );
 };
