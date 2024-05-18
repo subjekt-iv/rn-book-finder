@@ -1,74 +1,37 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
-import type {PropsWithChildren} from 'react';
+import 'react-native-gesture-handler';
+import {createStackNavigator} from '@react-navigation/stack';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import BookListScreen from '@/screens/book-list-screen';
+import BookDetailScreen from '@/screens/book-detail-screen';
+import {useColorScheme} from 'react-native';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from '@react-navigation/native';
 
-import {
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View className="mt-8 px-2">
-      <Text className="text-2xl text-black dark:text-white">{title}</Text>
-      <Text className="mt-2 text-lg text-black dark:text-white">
-        {children}
-      </Text>
-    </View>
-  );
-}
+const Stack = createStackNavigator();
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = 'bg-neutral-300 dark:bg-slate-900';
-
+  const scheme = useColorScheme();
   return (
-    <SafeAreaView className={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        className={backgroundStyle}>
-        <Header />
-        <View className="bg-white dark:bg-black">
-          <Section title="Step One">
-            Edit <Text className="font-bold">App.js</Text> to change this screen
-            and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <NavigationContainer theme={DarkTheme}>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="BookList"
+            component={BookListScreen}
+            options={{title: 'Book Search'}}
+          />
+          <Stack.Screen
+            name="BookDetail"
+            component={BookDetailScreen}
+            options={{title: 'Book Details'}}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 
