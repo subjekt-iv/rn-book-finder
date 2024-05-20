@@ -20,10 +20,10 @@ const BookList = ({books}) => {
             onPress={() =>
               navigation.navigate('BookDetail', {workKey: item.key})
             }>
-            <View className="border-b p-4 bg-brik-surface-2">
-              <Text className="text-xl">{item.title}</Text>
-              <Text className="text-gray-500">{item.author_name}</Text>
-              <Text className="text-gray-500">{item.first_publish_year}</Text>
+            <View className="border-b p-4 ">
+              <Text className="text-xl text-primary">{item.title}</Text>
+              <Text className="text-primary">{item.author_name}</Text>
+              <Text className="text-primary">{item.first_publish_year}</Text>
             </View>
           </TouchableOpacity>
         )}

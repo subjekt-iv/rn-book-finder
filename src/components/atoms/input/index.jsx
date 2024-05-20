@@ -7,7 +7,7 @@ const Input = ({value, onChangeText, placeholder, className}) => (
     onChangeText={onChangeText}
     placeholder={placeholder}
     placeholderTextColor="#121317"
-    className={`border p-2 w-full h-12 bg-brik-surface-2 rounded-lg ${className}`}
+    className={`border p-2 w-full h-12 bg-brik-surface-3 text-primary rounded-lg ${className}`}
   />
 );
 
