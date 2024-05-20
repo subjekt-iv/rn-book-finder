@@ -26,6 +26,19 @@ const BookDetailScreen = () => {
 
   const coverUrl = getCoverUrl();
 
+  const renderAuthor = author => {
+    if (!author) {
+      return <Text style={{color: 'red'}}>Autor no disponible</Text>;
+    }
+    if (typeof author === 'string') {
+      return <Text style={{fontSize: 20}}>{author}</Text>;
+    }
+    if (typeof author === 'object' && author.name) {
+      return <Text style={{fontSize: 20}}>{author.name}</Text>;
+    }
+    return <Text style={{color: 'red'}}>Autor no disponible</Text>;
+  };
+
   return (
     <>
       {loading ? (
@@ -55,33 +68,43 @@ const BookDetailScreen = () => {
                   />
                 </View>
               )}
-              {bookDetails.title && typeof bookDetails.title === 'string' && (
+              {bookDetails.title && typeof bookDetails.title === 'string' ? (
                 <Text className="text-2xl text-primary font-bold mt-4">
                   {bookDetails.title}
                 </Text>
+              ) : (
+                <Text className="text-red-500 mt-4">Titulo no disponible</Text>
               )}
               {bookDetails.first_publish_date &&
                 typeof bookDetails.first_publish_date === 'string' && (
-                  <Text className="text-primary mt-2">
+                  <Text className="text-primary">
                     {bookDetails.first_publish_date}
                   </Text>
                 )}
               {bookDetails.description &&
-                typeof bookDetails.description === 'string' && (
-                  <Text className="mt-4 text-primary">
-                    {bookDetails.description}
-                  </Text>
-                )}
-              {bookDetails.author.personal_name &&
-                typeof bookDetails.author.personal_name === 'string' && (
-                  <Text className="mt-4 text-xl text-primary">
-                    {bookDetails.author.personal_name}
-                  </Text>
-                )}
-              {bookDetails.author?.bio &&
-                typeof bookDetails.author.bio === 'string' && (
-                  <Text className="text-primary">{bookDetails.author.bio}</Text>
-                )}
+              typeof bookDetails.description === 'string' ? (
+                <Text className="text-primary mt-4">
+                  {bookDetails.description}
+                </Text>
+              ) : (
+                <Text className="text-red-500 mt-4">
+                  Descripcion no disponible
+                </Text>
+              )}
+
+              <Text className="text-xl text-primary mt-4">
+                {renderAuthor(bookDetails.author)}
+              </Text>
+
+              {bookDetails.author &&
+              bookDetails.author.bio &&
+              typeof bookDetails.author.bio === 'string' ? (
+                <Text className="text-primary">{bookDetails.author.bio}</Text>
+              ) : (
+                <Text className="text-red-500 mt-4">
+                  Biografía no disponible
+                </Text>
+              )}
             </ScrollView>
           )}
         </View>
