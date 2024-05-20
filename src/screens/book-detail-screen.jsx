@@ -57,10 +57,10 @@ const BookDetailScreen = () => {
                   {bookDetails.title}
                 </Text>
               )}
-              {bookDetails.first_publish_year &&
-                typeof bookDetails.first_publish_year === 'string' && (
-                  <Text className="text-primary">
-                    {bookDetails.first_publish_year}
+              {bookDetails.first_publish_date &&
+                typeof bookDetails.first_publish_date === 'string' && (
+                  <Text className="text-primary mt-2">
+                    {bookDetails.first_publish_date}
                   </Text>
                 )}
               {bookDetails.description &&
@@ -70,7 +70,7 @@ const BookDetailScreen = () => {
                   </Text>
                 )}
               {bookDetails.author.personal_name &&
-                typeof bookDetails.author.personal_name && (
+                typeof bookDetails.author.personal_name === 'string' && (
                   <Text className="mt-4 text-xl text-primary">
                     {bookDetails.author.personal_name}
                   </Text>
