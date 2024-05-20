@@ -5,7 +5,7 @@ const Button = ({name, onPress}) => (
   <TouchableOpacity
     onPress={onPress}
     className="bg-brik p-2 w-full rounded-lg mt-4">
-    <Text className="text-black text-lg  text-center">{name}</Text>
+    <Text className="text-primary text-lg  text-center">{name}</Text>
   </TouchableOpacity>
 );
 
