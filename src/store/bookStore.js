@@ -1,6 +1,7 @@
 import {create} from 'zustand';
 import {searchBooks, getBookDetails, getAuthorDetails} from '@/services/api';
 import {setItem, getItem} from '@/services/storage';
+import RNFS from 'react-native-fs';
 
 const useBookStore = create(set => ({
   books: [],
@@ -34,6 +35,17 @@ const useBookStore = create(set => ({
         response.data.authors[0].author.key,
       );
       const bookDetails = {...response.data, author: authorResponse.data};
+
+      if (bookDetails.covers && bookDetails.covers.length > 0) {
+        const coverUrl = `https://covers.openlibrary.org/b/id/${bookDetails.covers[0]}-L.jpg`;
+        const coverPath = `${RNFS.DocumentDirectoryPath}/${bookDetails.covers[0]}.jpg`;
+        await RNFS.downloadFile({
+          fromUrl: coverUrl,
+          toFile: coverPath,
+        }).promise;
+        bookDetails.localCoverPath = coverPath;
+      }
+
       set({
         bookDetails: bookDetails,
         loading: false,

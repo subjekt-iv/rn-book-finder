@@ -15,6 +15,9 @@ const BookDetailScreen = () => {
   }, [fetchBookDetails, workKey]);
 
   const getCoverUrl = () => {
+    if (bookDetails?.localCoverPath) {
+      return `file://${bookDetails.localCoverPath}`;
+    }
     if (bookDetails?.covers?.length > 0) {
       return `https://covers.openlibrary.org/b/id/${bookDetails.covers[0]}-L.jpg`;
     }
