@@ -4,15 +4,13 @@ import BookRecentList from '@/components/organisms/book-recent-list';
 
 const BookRecentTemplate = ({recentBooks, loading, error}) => {
   return (
-    <SafeAreaView className="flex-1">
-      <View className="p-4">
-        <BookRecentList
-          recentBooks={recentBooks}
-          loading={loading}
-          error={error}
-        />
-      </View>
-    </SafeAreaView>
+    <View>
+      <BookRecentList
+        recentBooks={recentBooks}
+        loading={loading}
+        error={error}
+      />
+    </View>
   );
 };
 
