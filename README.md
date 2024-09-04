@@ -18,6 +18,3 @@ El proyecto está organizado en varias carpetas principales:
 - `components/`: Componentes React para la UI. (Estructura Atomic design)
 - `screens/`: Páginas que representan diferentes vistas en la aplicación.
 
-Saludos y gracias 0/
-
-Agustín
